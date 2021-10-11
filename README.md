@@ -21,9 +21,9 @@ The basic command line game code can then be executed using the command:
 
 called from `src-py` (the directory containing the `resistance` package).
 
-#Rules
+# Rules
 
-##Rules - resistance
+## Rules - resistance
 
 Resistance is a multiplayer game, requiring at least 5 players. One third of the players are selected to be government spies, and the remaining players are memebers of the resistance.
 The spies know who all the other spies are, but the resistance members are unable to distinguish the spies.
@@ -39,7 +39,7 @@ This is done privately, and the only public information released is how many peo
 
 If at least 3 missions succeed, the resistance wins. Otherwise the government wins.
 
-##Rules - AI bots
+## Rules - AI bots
 1. AI bots must implement the provided agent interface, and we will add restrictions for the amount of computation, and system resources they can use.
 5. Agents should have a parameterless constructor
 5. Java classes should have unique names. Please append your student number to the end of each class name to avoid clashes.
