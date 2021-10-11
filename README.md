@@ -40,6 +40,7 @@ This is done privately, and the only public information released is how many peo
 If at least 3 missions succeed, the resistance wins. Otherwise the government wins.
 
 ## Rules - AI bots
+
 1. AI bots must implement the provided agent interface, and we will add restrictions for the amount of computation, and system resources they can use.
 5. Agents should have a parameterless constructor
 5. Java classes should have unique names. Please append your student number to the end of each class name to avoid clashes.
@@ -52,5 +53,3 @@ If at least 3 missions succeed, the resistance wins. Otherwise the government wi
 12. Agents who go over time, will be penalised or removed from the competition.
 
 Good luck.
-
-
