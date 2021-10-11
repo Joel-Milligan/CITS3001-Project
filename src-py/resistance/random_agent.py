@@ -1,3 +1,5 @@
+# type: ignore
+
 from resistance.agent import Agent
 import random
 

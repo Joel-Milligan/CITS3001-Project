@@ -1,3 +1,5 @@
+# type: ignore
+
 class Agent:
     '''An abstract super class for an agent in the game The Resistance.
     new_game and *_outcome methods simply inform agents of events that have occured,

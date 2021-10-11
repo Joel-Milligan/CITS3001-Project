@@ -1,3 +1,5 @@
+# type: ignore
+
 from resistance.random_agent import RandomAgent
 from resistance.game import Game
 
