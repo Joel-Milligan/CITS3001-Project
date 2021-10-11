@@ -1,7 +1,8 @@
-from agent import Agent
+from resistance.agent import Agent
 import random
 
-class RandomAgent(Agent):        
+
+class RandomAgent(Agent):
     '''A sample implementation of a random agent in the game The Resistance'''
 
     def __init__(self, name='Rando'):
@@ -27,18 +28,18 @@ class RandomAgent(Agent):
         '''
         return self.player_number in self.spy_list
 
-    def propose_mission(self, team_size, betrayals_required = 1):
+    def propose_mission(self, team_size, betrayals_required=1):
         '''
         expects a team_size list of distinct agents with id between 0 (inclusive) and number_of_players (exclusive)
         to be returned. 
         betrayals_required are the number of betrayals required for the mission to fail.
         '''
         team = []
-        while len(team)<team_size:
+        while len(team) < team_size:
             agent = random.randrange(team_size)
             if agent not in team:
                 team.append(agent)
-        return team        
+        return team
 
     def vote(self, mission, proposer):
         '''
@@ -47,7 +48,7 @@ class RandomAgent(Agent):
         proposer is an int between 0 and number_of_players and is the index of the player who proposed the mission.
         The function should return True if the vote is for the mission, and False if the vote is against the mission.
         '''
-        return random.random()<0.5
+        return random.random() < 0.5
 
     def vote_outcome(self, mission, proposer, votes):
         '''
@@ -57,7 +58,7 @@ class RandomAgent(Agent):
         votes is a dictionary mapping player indexes to Booleans (True if they voted for the mission, False otherwise).
         No return value is required or expected.
         '''
-        #nothing to do here
+        # nothing to do here
         pass
 
     def betray(self, mission, proposer):
@@ -69,7 +70,7 @@ class RandomAgent(Agent):
         By default, spies will betray 30% of the time. 
         '''
         if self.is_spy():
-            return random.random()<0.3
+            return random.random() < 0.3
 
     def mission_outcome(self, mission, proposer, betrayals, mission_success):
         '''
@@ -80,7 +81,7 @@ class RandomAgent(Agent):
         and mission_success is True if there were not enough betrayals to cause the mission to fail, False otherwise.
         It iss not expected or required for this function to return anything.
         '''
-        #nothing to do here
+        # nothing to do here
         pass
 
     def round_outcome(self, rounds_complete, missions_failed):
@@ -89,17 +90,14 @@ class RandomAgent(Agent):
         rounds_complete, the number of rounds (0-5) that have been completed
         missions_failed, the numbe of missions (0-3) that have failed.
         '''
-        #nothing to do here
+        # nothing to do here
         pass
-    
+
     def game_outcome(self, spies_win, spies):
         '''
         basic informative function, where the parameters indicate:
         spies_win, True iff the spies caused 3+ missions to fail
         spies, a list of the player indexes for the spies.
         '''
-        #nothing to do here
+        # nothing to do here
         pass
-
-
-

@@ -1,5 +1,5 @@
-from random_agent import RandomAgent
-from game import Game
+from resistance.random_agent import RandomAgent
+from resistance.game import Game
 
 agents = [RandomAgent(name='r1'),
           RandomAgent(name='r2'),

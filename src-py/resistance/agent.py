@@ -3,29 +3,29 @@ class Agent:
     new_game and *_outcome methods simply inform agents of events that have occured,
     while propose_mission, vote, and betray require the agent to commit some action.'''
 
-    #game parameters for agents to access
-    #python is such that these variables could be mutated, so tournament play
-    #will be conducted via web sockets.
-    #e.g. self.mission_size[8][3] is the number to be sent on the 3rd mission in a game of 8
+    # Game parameters for agents to access
+    # Python is such that these variables could be mutated, so tournament play
+    # will be conducted via web sockets.
+    # e.g. self.mission_size[8][3] is the number to be sent on the 3rd mission in a game of 8
     mission_sizes = {
-            5:[2,3,2,3,3], \
-            6:[3,3,3,3,3], \
-            7:[2,3,3,4,5], \
-            8:[3,4,4,5,5], \
-            9:[3,4,4,5,5], \
-            10:[3,4,4,5,5]
-            }
-    #number of spies for different game sizes
-    spy_count = {5:2, 6:2, 7:3, 8:3, 9:3, 10:4} 
-    #e.g. self.betrayals_required[8][3] is the number of betrayals required for the 3rd mission in a game of 8 to fail
+        5: [2, 3, 2, 3, 3],
+        6: [3, 3, 3, 3, 3],
+        7: [2, 3, 3, 4, 5],
+        8: [3, 4, 4, 5, 5],
+        9: [3, 4, 4, 5, 5],
+        10: [3, 4, 4, 5, 5]
+    }
+    # number of spies for different game sizes
+    spy_count = {5: 2, 6: 2, 7: 3, 8: 3, 9: 3, 10: 4}
+    # e.g. self.betrayals_required[8][3] is the number of betrayals required for the 3rd mission in a game of 8 to fail
     fails_required = {
-            5:[1,1,1,1,1], \
-            6:[1,1,1,1,1], \
-            7:[1,1,1,2,1], \
-            8:[1,1,1,2,1], \
-            9:[1,1,1,2,1], \
-            10:[1,1,1,2,1]
-            }
+        5: [1, 1, 1, 1, 1],
+        6: [1, 1, 1, 1, 1],
+        7: [1, 1, 1, 2, 1],
+        8: [1, 1, 1, 2, 1],
+        9: [1, 1, 1, 2, 1],
+        10: [1, 1, 1, 2, 1]
+    }
 
     def __init__(self, name):
         '''
@@ -58,7 +58,7 @@ class Agent:
         '''
         pass
 
-    def propose_mission(self, team_size, fails_required = 1):
+    def propose_mission(self, team_size, fails_required=1):
         '''
         expects a team_size list of distinct agents with id between 0 (inclusive) and number_of_players (exclusive)
         to be returned. 
@@ -113,7 +113,7 @@ class Agent:
         missions_failed, the numbe of missions (0-3) that have failed.
         '''
         pass
-    
+
     def game_outcome(self, spies_win, spies):
         '''
         basic informative function, where the parameters indicate:
@@ -121,5 +121,3 @@ class Agent:
         spies, a list of the player indexes for the spies.
         '''
         pass
-
-
