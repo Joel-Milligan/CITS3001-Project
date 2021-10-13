@@ -1,47 +1,50 @@
-from resistance.agent import Agent
+from typing import List
+from agent import Agent
 import random
 
 
-class RandomAgent(Agent):
-    '''A sample implementation of a random agent in the game The Resistance'''
+class DetectiveAgent(Agent):
+    '''
+    ???
+    '''
 
-    def __init__(self, name='Rando'):
+    def __init__(self, name: str = 'Sherlock') -> None:
         '''
         Initialises the agent.
-        Nothing to do here.
         '''
         self.name = name
 
-    def new_game(self, number_of_players, player_number, spy_list):
+    def new_game(self, number_of_players: int, player_number: int, spy_list: List[int]) -> None:
         '''
         Initialises the game, informing the agent of the 
-        number_of_players, the player_number (an id number for the agent in the game),
-        and a list of agent indexes which are the spies, if the agent is a spy, or empty otherwise
+        number_of_players, the player_number,
+        and a list of agent indexes which are the spies, 
+        if the agent is a spy, or empty otherwise
         '''
         self.number_of_players = number_of_players
         self.player_number = player_number
         self.spy_list = spy_list
 
-    def is_spy(self):
+    def is_spy(self) -> bool:
         '''
         returns True iff the agent is a spy
         '''
         return self.player_number in self.spy_list
 
-    def propose_mission(self, team_size, betrayals_required=1):
+    def propose_mission(self, team_size: int, betrayals_required: int = 1) -> List[int]:
         '''
         expects a team_size list of distinct agents with id between 0 (inclusive) and number_of_players (exclusive)
         to be returned. 
         betrayals_required are the number of betrayals required for the mission to fail.
         '''
-        team = []
+        team: List[int] = []
         while len(team) < team_size:
             agent = random.randrange(team_size)
             if agent not in team:
                 team.append(agent)
         return team
 
-    def vote(self, mission, proposer):
+    def vote(self, mission: List[int], proposer: int) -> bool:
         '''
         mission is a list of agents to be sent on a mission. 
         The agents on the mission are distinct and indexed between 0 and number_of_players.
@@ -50,7 +53,7 @@ class RandomAgent(Agent):
         '''
         return random.random() < 0.5
 
-    def vote_outcome(self, mission, proposer, votes):
+    def vote_outcome(self, mission: List[int], proposer: int, votes: dict[int, bool]) -> None:
         '''
         mission is a list of agents to be sent on a mission. 
         The agents on the mission are distinct and indexed between 0 and number_of_players.
@@ -61,7 +64,7 @@ class RandomAgent(Agent):
         # nothing to do here
         pass
 
-    def betray(self, mission, proposer):
+    def betray(self, mission: List[int], proposer: int) -> bool:
         '''
         mission is a list of agents to be sent on a mission. 
         The agents on the mission are distinct and indexed between 0 and number_of_players, and include this agent.
@@ -72,19 +75,21 @@ class RandomAgent(Agent):
         if self.is_spy():
             return random.random() < 0.3
 
-    def mission_outcome(self, mission, proposer, betrayals, mission_success):
+        return False
+
+    def mission_outcome(self, mission: List[int], proposer: int, betrayals: int, mission_success: bool) -> None:
         '''
         mission is a list of agents to be sent on a mission. 
         The agents on the mission are distinct and indexed between 0 and number_of_players.
         proposer is an int between 0 and number_of_players and is the index of the player who proposed the mission.
         betrayals is the number of people on the mission who betrayed the mission, 
         and mission_success is True if there were not enough betrayals to cause the mission to fail, False otherwise.
-        It iss not expected or required for this function to return anything.
+        It is not expected or required for this function to return anything.
         '''
         # nothing to do here
         pass
 
-    def round_outcome(self, rounds_complete, missions_failed):
+    def round_outcome(self, rounds_complete: int, missions_failed: int) -> None:
         '''
         basic informative function, where the parameters indicate:
         rounds_complete, the number of rounds (0-5) that have been completed
@@ -93,7 +98,7 @@ class RandomAgent(Agent):
         # nothing to do here
         pass
 
-    def game_outcome(self, spies_win, spies):
+    def game_outcome(self, spies_win: bool, spies: List[int]) -> None:
         '''
         basic informative function, where the parameters indicate:
         spies_win, True iff the spies caused 3+ missions to fail

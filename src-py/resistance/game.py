@@ -1,7 +1,7 @@
 # type: ignore
 
-from resistance.agent import Agent
-from resistance.random_agent import RandomAgent
+from agent import Agent
+from random_agent import RandomAgent
 import random
 
 

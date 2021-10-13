@@ -1,6 +1,6 @@
 # type: ignore
 
-from resistance.agent import Agent
+from agent import Agent
 import random
 
 

@@ -1,4 +1,5 @@
-# type: ignore
+from typing import List
+
 
 class Agent:
     '''An abstract super class for an agent in the game The Resistance.
@@ -29,7 +30,7 @@ class Agent:
         10: [1, 1, 1, 2, 1]
     }
 
-    def __init__(self, name):
+    def __init__(self, name: str) -> None:
         '''
         Initialises the agent, and gives it a name
         You can add configuration parameters etc here,
@@ -38,20 +39,20 @@ class Agent:
         '''
         self.name = name
 
-    def __str__(self):
+    def __str__(self) -> str:
         '''
-        Returns a string represnetation of the agent
+        Returns a string representation of the agent
         '''
         return 'Agent '+self.name
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         '''
         returns a representation fthe state of the agent.
         default implementation is just the name, but this may be overridden for debugging
         '''
         return self.__str__()
 
-    def new_game(self, number_of_players, player_number, spies):
+    def new_game(self, number_of_players: int, player_number: int, spies: List[int]) -> None:
         '''
         initialises the game, informing the agent of the number_of_players, 
         the player_number (an id number for the agent in the game),
@@ -60,7 +61,7 @@ class Agent:
         '''
         pass
 
-    def propose_mission(self, team_size, fails_required=1):
+    def propose_mission(self, team_size: int, fails_required: int = 1) -> List[int]:
         '''
         expects a team_size list of distinct agents with id between 0 (inclusive) and number_of_players (exclusive)
         to be returned. 
@@ -68,7 +69,7 @@ class Agent:
         '''
         pass
 
-    def vote(self, mission, proposer):
+    def vote(self, mission: List[int], proposer: int) -> bool:
         '''
         mission is a list of agents to be sent on a mission. 
         The agents on the mission are distinct and indexed between 0 and number_of_players.
@@ -77,7 +78,7 @@ class Agent:
         '''
         pass
 
-    def vote_outcome(self, mission, proposer, votes):
+    def vote_outcome(self, mission: List[int], proposer: int, votes: dict[int, bool]) -> None:
         '''
         mission is a list of agents to be sent on a mission. 
         The agents on the mission are distinct and indexed between 0 and number_of_players.
@@ -87,7 +88,7 @@ class Agent:
         '''
         pass
 
-    def betray(self, mission, proposer):
+    def betray(self, mission: List[int], proposer: int) -> bool:
         '''
         mission is a list of agents to be sent on a mission. 
         The agents on the mission are distinct and indexed between 0 and number_of_players, and include this agent.
@@ -97,7 +98,7 @@ class Agent:
         '''
         pass
 
-    def mission_outcome(self, mission, proposer, num_fails, mission_success):
+    def mission_outcome(self, mission: List[int], proposer: int, num_fails: int, mission_success: bool) -> None:
         '''
         mission is a list of agents to be sent on a mission. 
         The agents on the mission are distinct and indexed between 0 and number_of_players.
@@ -108,7 +109,7 @@ class Agent:
         '''
         pass
 
-    def round_outcome(self, rounds_complete, missions_failed):
+    def round_outcome(self, rounds_complete: int, missions_failed: int) -> None:
         '''
         basic informative function, where the parameters indicate:
         rounds_complete, the number of rounds (0-5) that have been completed
@@ -116,7 +117,7 @@ class Agent:
         '''
         pass
 
-    def game_outcome(self, spies_win, spies):
+    def game_outcome(self, spies_win: bool, spies: List[int]) -> None:
         '''
         basic informative function, where the parameters indicate:
         spies_win, True iff the spies caused 3+ missions to fail
