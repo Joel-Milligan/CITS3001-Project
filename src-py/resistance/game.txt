@@ -1,0 +1,49 @@
+Game between agents:[Agent r6, Agent r2, Agent r1, Agent Sherlock, Agent r5, Agent r4, Agent r3]
+Round:0
+Leader:Agent r6
+Team: Agent r6, Agent r2
+Votes for: Agent r1, Agent r4
+Mission Aborted
+Leader:Agent r2
+Team: Agent r6, Agent r2
+Votes for: Agent r2, Agent r5
+Mission Aborted
+Leader:Agent r1
+Team: Agent r2, Agent r6
+Votes for: Agent r2, Agent r1, Agent Sherlock, Agent r5, Agent r4
+Fails recorded:1
+Mission Failed
+Resistance lost the round.
+Round:1
+Leader:Agent Sherlock
+Team: Agent r6, Agent r2, Agent r1
+Votes for: Agent r1, Agent Sherlock, Agent r5, Agent r4
+Fails recorded:0
+Mission Succeeded
+Resistance won the round.
+Round:2
+Leader:Agent r5
+Team: Agent r6, Agent r2, Agent r1
+Votes for: Agent r6, Agent r2, Agent Sherlock, Agent r5, Agent r4, Agent r3
+Fails recorded:0
+Mission Succeeded
+Resistance won the round.
+Round:3
+Leader:Agent r4
+Team: Agent r1, Agent r2, Agent Sherlock, Agent r6
+Votes for: Agent r2, Agent Sherlock, Agent r5, Agent r4, Agent r3
+Fails recorded:0
+Mission Succeeded
+Resistance won the round.
+Round:4
+Leader:Agent r3
+Team: Agent Sherlock, Agent r5, Agent r2, Agent r1, Agent r6
+Votes for: Agent r6, Agent r4
+Mission Aborted
+Leader:Agent r6
+Team: Agent r1, Agent r6, Agent Sherlock, Agent r2, Agent r5
+Votes for: Agent r2, Agent r1, Agent r5, Agent r4
+Fails recorded:1
+Mission Failed
+Resistance lost the round.
+The Resistance succeeded!The spies were agents: [0, 6, 5]
