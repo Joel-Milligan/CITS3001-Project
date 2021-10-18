@@ -29,6 +29,10 @@ hs_err_pid*
 **/*.snm
 **/*.tuc
 
+**/*.fls
+**/*.synctex.gz
+**/*.fdb_latexmk
+
 # (La)TeX:
 # Lists:
 **/*.lof
