@@ -1,11 +1,12 @@
-from typing import List
+from typing import List, Dict
 from agent import Agent
 import random
 
 
 class DetectiveAgent(Agent):
     '''
-    ???
+    An agent that attempts to determine spies.
+    Plays randomly as a spy.
     '''
 
     def __init__(self, name: str = 'Sherlock') -> None:
@@ -13,6 +14,7 @@ class DetectiveAgent(Agent):
         Initialises the agent.
         '''
         self.name = name
+        self.suspicion: Dict[int, float] = dict()
 
     def new_game(self, number_of_players: int, player_number: int, spy_list: List[int]) -> None:
         '''
@@ -24,6 +26,27 @@ class DetectiveAgent(Agent):
         self.number_of_players = number_of_players
         self.player_number = player_number
         self.spy_list = spy_list
+
+        if self.player_number not in self.spy_list:
+            self.suspicion = dict()
+
+            # Minus one because we know we aren't a spy.
+            number_of_spies = Agent.spy_count[number_of_players]
+            spy_chance = number_of_spies / (number_of_players - 1)
+
+            for p in range(number_of_players):
+                self.suspicion.update({p: spy_chance})
+
+            # Set our own suspicion to 0 due to secret knowledge
+            self.suspicion.update({player_number: 0.0})
+        else:
+            self.suspicion = dict()
+
+            for p in range(number_of_players):
+                if p in spy_list:
+                    self.suspicion.update({p: 100.0})
+                else:
+                    self.suspicion.update({p: 0.0})
 
     def is_spy(self) -> bool:
         '''
