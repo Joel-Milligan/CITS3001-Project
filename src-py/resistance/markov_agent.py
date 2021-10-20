@@ -5,8 +5,7 @@ import random
 
 class MarkovAgent(Agent):
     '''
-    An agent that attempts to determine spies.
-    Plays randomly as a spy.
+    Agent that uses Markov Methods.
     '''
 
     def __init__(self, name: str = 'Mr. Markov') -> None:
@@ -14,7 +13,6 @@ class MarkovAgent(Agent):
         Initialises the agent.
         '''
         self.name = name
-        self.suspicion: Dict[int, float] = dict()
 
     def new_game(self, number_of_players: int, player_number: int, spy_list: List[int]) -> None:
         '''
@@ -56,8 +54,8 @@ class MarkovAgent(Agent):
 
     def propose_mission(self, team_size: int, betrayals_required: int = 1) -> List[int]:
         '''
-        expects a team_size list of distinct agents with id between 0 (inclusive) and number_of_players (exclusive)
-        to be returned. 
+        expects a team_size list of distinct agents with id between 
+        0 (inclusive) and number_of_players (exclusive) to be returned. 
         betrayals_required are the number of betrayals required for the mission to fail.
         '''
         team: List[int] = []
