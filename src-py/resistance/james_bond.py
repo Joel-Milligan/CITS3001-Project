@@ -3,13 +3,13 @@ from agent import Agent
 import random
 
 
-class DetectiveAgent(Agent):
+class MarkovAgent(Agent):
     '''
     An agent that attempts to determine spies.
     Plays randomly as a spy.
     '''
 
-    def __init__(self, name: str = 'Sherlock') -> None:
+    def __init__(self, name: str = 'Mr. Markov') -> None:
         '''
         Initialises the agent.
         '''
