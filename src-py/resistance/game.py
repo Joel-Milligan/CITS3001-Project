@@ -55,7 +55,7 @@ class Game:
             leader_id = (
                 leader_id+len(self.rounds[i].missions)) % len(self.agents)
         for a in self.agents:
-            a.game_outcome(self.missions_lost < 3, self.spies)
+            a.game_outcome(self.missions_lost >= 3, self.spies)
 
     def __str__(self):
         s = 'Game between agents:' + str(self.agents)
