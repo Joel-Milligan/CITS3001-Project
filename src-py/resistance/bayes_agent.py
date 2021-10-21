@@ -1,14 +1,15 @@
 from typing import List, Dict
 from agent import Agent
 import random
+from heapq import nsmallest
 
 
-class MarkovAgent(Agent):
+class BayesAgent(Agent):
     '''
-    Agent that uses Markov Methods.
+    Agent that uses Bayes' Theorem.
     '''
 
-    def __init__(self, name: str = 'Mr. Markov') -> None:
+    def __init__(self, name: str = 'Mr. Bayesian') -> None:
         '''
         Initialises the agent.
         '''
@@ -29,22 +30,23 @@ class MarkovAgent(Agent):
             self.suspicion = dict()
 
             # Minus one because we know we aren't a spy.
-            number_of_spies = Agent.spy_count[number_of_players]
-            spy_chance = number_of_spies / (number_of_players - 1)
+            # number_of_spies = Agent.spy_count[number_of_players]
+            # spy_chance = number_of_spies / (number_of_players - 1)
+            spy_chance = 1
 
             for p in range(number_of_players):
                 self.suspicion.update({p: spy_chance})
 
             # Set our own suspicion to 0 due to secret knowledge
-            self.suspicion.update({player_number: 0.0})
+            self.suspicion.update({player_number: 0})
         else:
             self.suspicion = dict()
 
             for p in range(number_of_players):
                 if p in spy_list:
-                    self.suspicion.update({p: 100.0})
+                    self.suspicion.update({p: 100})
                 else:
-                    self.suspicion.update({p: 0.0})
+                    self.suspicion.update({p: 0})
 
     def is_spy(self) -> bool:
         '''
@@ -58,11 +60,15 @@ class MarkovAgent(Agent):
         0 (inclusive) and number_of_players (exclusive) to be returned. 
         betrayals_required are the number of betrayals required for the mission to fail.
         '''
-        team: List[int] = []
-        while len(team) < team_size:
-            agent = random.randrange(team_size)
-            if agent not in team:
-                team.append(agent)
+        if self.is_spy():
+            team: List[int] = []
+            while len(team) < team_size:
+                agent = random.randrange(team_size)
+                if agent not in team:
+                    team.append(agent)
+            return team
+
+        team = nsmallest(team_size, self.suspicion, key=self.suspicion.get)
         return team
 
     def vote(self, mission: List[int], proposer: int) -> bool:
@@ -72,7 +78,19 @@ class MarkovAgent(Agent):
         proposer is an int between 0 and number_of_players and is the index of the player who proposed the mission.
         The function should return True if the vote is for the mission, and False if the vote is against the mission.
         '''
-        return random.random() < 0.5
+        total_suspicion = 0
+
+        for player in mission:
+            total_suspicion += self.suspicion[player]
+
+        total_suspicion += self.suspicion[player] / 2
+
+        if not self.is_spy():
+            average_sus = total_suspicion / len(mission)
+            total_sus = sum(self.suspicion.values())
+            return average_sus < total_sus * 0.5
+        else:
+            return True
 
     def vote_outcome(self, mission: List[int], proposer: int, votes: dict[int, bool]) -> None:
         '''
@@ -94,7 +112,7 @@ class MarkovAgent(Agent):
         By default, spies will betray 30% of the time. 
         '''
         if self.is_spy():
-            return random.random() < 0.3
+            return random.random() < 1
 
         return False
 
@@ -107,8 +125,18 @@ class MarkovAgent(Agent):
         and mission_success is True if there were not enough betrayals to cause the mission to fail, False otherwise.
         It is not expected or required for this function to return anything.
         '''
-        # nothing to do here
-        pass
+        if not mission_success:
+            for player in mission:
+                self.suspicion[player] += 1
+
+            if proposer not in mission:
+                self.suspicion[proposer] += 0.5
+        else:
+            for player in mission:
+                self.suspicion[player] -= 1
+
+            if proposer not in mission:
+                self.suspicion[proposer] -= 0.5
 
     def round_outcome(self, rounds_complete: int, missions_failed: int) -> None:
         '''
